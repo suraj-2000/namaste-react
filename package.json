@@ -1,0 +1,29 @@
+{
+    "name": "react",
+    "version": "1.0.0",
+    "description": "Namaste React by Akshay Saini",
+    "scripts": {
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/suraj-2000/namaste-react.git"
+    },
+    "keywords": [],
+    "author": "Suraj Singh",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/suraj-2000/namaste-react/issues"
+    },
+    "homepage": "https://github.com/suraj-2000/namaste-react#readme",
+    "devDependencies": {
+        "parcel": "^2.16.0"
+    },
+    "dependencies": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
+    },
+    "browserslist": [
+        "last 0 versions"
+    ]
+}
