@@ -1,36 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-// Header
-//   Logo 
-//   Nav 
-//      Home
-//      About
-//      Cart
-// Body 
-//    Search
-//    ResturantCard
-//        Resturants
-            //   img
-            //   name of res, star rating, cuisine etc
-// Footer
-//    Copyright
-//    Links
-//    Addresss
-//    Contact
-
-// const Resturant = () => {
-//     return (
-
-
-//     );
-
-// };
 const resData = [
   { 
     id: 1, 
     name: "Thalaiva Biryani", 
-    avgRating: 4.2, 
+    avgRating: 3.2, 
     cloudinaryImageId: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=660&q=80", 
     deliveryTime: 32 
   },
@@ -44,7 +16,7 @@ const resData = [
   { 
     id: 3,
     name: "Behrouz Biryani", 
-    avgRating: 4.3, 
+    avgRating: 3.3, 
     cloudinaryImageId: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=660&q=80", 
     deliveryTime: 28 
   },
@@ -127,70 +99,4 @@ const resData = [
   },
 ];
 
-
-
-
-
-const ResturantCard = (props) => {
-    const {resList} = props;
-    const {name, avgRating,cloudinaryImageId,deliveryTime} = resList;
-    return ( 
-        <div className="res-card">
-  <img 
-    className="res-card-image"
-    src={cloudinaryImageId}
-  />
-  <h3>{name}</h3>
-  <h4>{"Rating:" + avgRating}</h4>
-  <h4>{"Delivery Time:" + deliveryTime+ " minutes"}</h4>
-</div>
-
-
-    );
-
-};
-const Body = () => {
-    return (
-        <div className="body">
-            <div className="search"> 
-                Search
-            </div>
-            <div className="res-container">
-                {resData.map((rest) => <ResturantCard key = {rest.id} resList={rest}></ResturantCard>)}
-            </div>
-        </div>
-
-    );
-
-};
-
-const Header = () => {
-    return (
-        <div className="header">
-        <div className="logo-container">
-            <img className="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3hcs6jrSmJM4V88uVtHWRNtaGQBswGqAp-7_-AeBO56QcRGZnfWZ2SRw&s"/>
-        </div>
-        <div className="nav-items">
-            <ul>
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Cart</li>
-            </ul>
-        </div>
-        </div>
-
-    );
-};
-const AppLayout = () => {
-    return (
-        <div className="app">
-            <Header/> 
-            <Body/>
-        </div>
-    );
-};
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout/>);
-
-
+export default resData;

@@ -19,6 +19,7 @@
     },
     "homepage": "https://github.com/suraj-2000/namaste-react#readme",
     "devDependencies": {
+        "@parcel/transformer-react-refresh-wrap": "^2.16.0",
         "parcel": "^2.16.0"
     },
     "dependencies": {
