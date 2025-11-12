@@ -1,21 +1,10 @@
-import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import useResturantMenu from "../utils/useResturantMenu";
 
 const RestaurantMenu = () => {
-    const [menuList, setMenuList] = useState(null);
     const { restId } = useParams();
-    useEffect(()=> {
-        fetchMenu();
-    },[]);
-
-    const fetchMenu = async ()=> {
-        const proxyURL = "https://api.allorigins.win/raw?url=";
-        const targetURL = `https://namastedev.com/api/v1/listRestaurantMenu/${restId}`;
-        const data = await fetch(proxyURL+targetURL);
-        const json = await data.json();
-        setMenuList(json.data);
-    }
+    const menuList = useResturantMenu(restId);
     if(menuList === null) return  <Shimmer/>;
     const {name,cuisines,costForTwoMessage,cloudinaryImageId,avgRating} = menuList?.cards[2]?.card?.card?.info;
     const itemCards = menuList?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card?.itemCards || [];
