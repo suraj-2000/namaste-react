@@ -2,6 +2,8 @@ import ResturantCard from "./ResturantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
     // useState() hooks
     const [searchBtnText, setSearchBtnText] = useState("");
@@ -17,15 +19,15 @@ const Body = () => {
     }
     useEffect(()=> {
         fetchData();
-        const timer = setInterval(()=> {
-            console.log("Namaste React!!");
-        },1000);
-        console.log("useEffect is called!!");
+        // const timer = setInterval(()=> {
+        //     console.log("Namaste React!!");
+        // },1000);
+        //  console.log("useEffect is called!!");
         //Like unmount
-        return () => {
-            console.log("Use effect return!!");
-            clearInterval(timer);
-        };
+        // return () => {
+        //     console.log("Use effect return!!");
+        //     clearInterval(timer);
+        // };
     },[]);
     // Conditional Rendering
     // if(topRatedRest.length === 0) { return <Shimmer/> }
@@ -42,6 +44,10 @@ const Body = () => {
         }
         setFilteredRest(filterRest);
     };
+
+    if(useOnlineStatus() === false ) {
+        return <h1>You are offline, please check your internet connection.</h1>
+    }
     return allRestaurants?.length === 0 ? <Shimmer/> : (
         <div className="body">
             <div className="search">

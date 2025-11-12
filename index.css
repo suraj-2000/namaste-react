@@ -265,7 +265,8 @@
   cursor: pointer;
 }
 .no-underline {
-  text-decoration: none; /* Removes underline */
+  text-decoration: none;
+  color: white; /* Removes underline */
 }
 .restaurant-card {
   max-width: 800px;
