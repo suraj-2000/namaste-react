@@ -1,22 +1,73 @@
 import ResturantCard from "./ResturantCard";
-import resData from "../utils/mockData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 const Body = () => {
     // useState() hooks
-    const [topRatedRest, setTopRatedRest] = useState(resData);
-    return (
+    const [searchBtnText, setSearchBtnText] = useState("");
+    const [allRestaurants, setAllRestaurants] = useState([]);
+    const [filteredRest, setFilteredRest] = useState([]);
+    const fetchData = async () => {
+        const proxyURL = "https://api.allorigins.win/raw?url=";
+        const targetURL = "https://namastedev.com/api/v1/listRestaurants";
+        const data = await fetch(proxyURL+targetURL);
+        const json = await data.json();
+        setAllRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRest(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    }
+    useEffect(()=> {
+        fetchData();
+        const timer = setInterval(()=> {
+            console.log("Namaste React!!");
+        },1000);
+        console.log("useEffect is called!!");
+        //Like unmount
+        return () => {
+            console.log("Use effect return!!");
+            clearInterval(timer);
+        };
+    },[]);
+    // Conditional Rendering
+    // if(topRatedRest.length === 0) { return <Shimmer/> }
+    const applyFilters = (searchBtnText, filterTopRated) => {
+        let filterRest = allRestaurants;
+        if(searchBtnText) {
+            filterRest = filterRest.filter((rest)=> rest.info.name.toLowerCase().includes(searchBtnText.toLowerCase()));
+        }
+        if(filterTopRated) {
+            filterRest = filterRest.filter((rest)=>rest.info.avgRating > 4);
+        }
+        if(!searchBtnText && !filterTopRated) {
+            setSearchBtnText("");
+        }
+        setFilteredRest(filterRest);
+    };
+    return allRestaurants?.length === 0 ? <Shimmer/> : (
         <div className="body">
+            <div className="search">
+                <input type="text" value={searchBtnText} onChange={(e)=>{
+                    setSearchBtnText(e.target.value);
+                }}   onKeyDown={e => {
+                if (e.key === 'Enter') {
+                   applyFilters(searchBtnText, false);
+                }
+                }}
+                ></input>
+                <button className="btn" onClick={()=> {
+                    applyFilters(searchBtnText, false);
+                }} >Search</button>
+            </div>
             <div className="filter-rest"> 
-                <button onClick={()=>{
-                    const filterRest = topRatedRest.filter((rest)=>rest.avgRating > 4);
-                    setTopRatedRest(filterRest);
+                <button className="btn" onClick={()=>{
+                    applyFilters("", true);
                     }}>Top Rated Resturant </button>
-                <button onClick={()=>{
-                    setTopRatedRest(resData);
-                    }}>Reset Ratings </button>
+                <button className="btn" onClick={()=>{
+                    applyFilters("", false);
+                    }}>Clear Filters </button>
             </div>
             <div className="res-container">
-                {topRatedRest.map((rest) => <ResturantCard key = {rest.id} resList={rest}></ResturantCard>)}
+                {filteredRest?.length === 0 ? <div className="centered-text"><h4>No Restaurant Found...</h4> </div>
+                :filteredRest?.map((rest) => <Link  to={"/resturant/"+rest.info.id} key = {rest.info.id}><ResturantCard resList={rest}></ResturantCard></Link>)}
             </div>
         </div>
 
