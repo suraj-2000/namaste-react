@@ -50,8 +50,8 @@ const Body = () => {
     }
     return allRestaurants?.length === 0 ? <Shimmer/> : (
         <div className="body">
-            <div className="search">
-                <input type="text" value={searchBtnText} onChange={(e)=>{
+            <div >
+                <input className="border border-gray-400 rounded-md mt-4 px-3 py-1 text-gray-900" type="text" value={searchBtnText} onChange={(e)=>{
                     setSearchBtnText(e.target.value);
                 }}   onKeyDown={e => {
                 if (e.key === 'Enter') {
@@ -59,19 +59,19 @@ const Body = () => {
                 }
                 }}
                 ></input>
-                <button className="btn" onClick={()=> {
+                <button className="mx-2 radius- bg-orange-600 rounded-xl px-4 py-1.5 hover:bg-orange-600 cursor-pointer" onClick={()=> {
                     applyFilters(searchBtnText, false);
                 }} >Search</button>
             </div>
             <div className="filter-rest"> 
-                <button className="btn" onClick={()=>{
+                <button className="my-2 radius- bg-orange-600 rounded-xl px-4 py-1.5 hover:bg-orange-600 cursor-pointer" onClick={()=>{
                     applyFilters("", true);
                     }}>Top Rated Resturant </button>
-                <button className="btn" onClick={()=>{
+                <button className="mx-2 radius- bg-orange-600 rounded-xl px-4 py-1.5 hover:bg-orange-600 cursor-pointer" onClick={()=>{
                     applyFilters("", false);
                     }}>Clear Filters </button>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {filteredRest?.length === 0 ? <div className="centered-text"><h4>No Restaurant Found...</h4> </div>
                 :filteredRest?.map((rest) => <Link  to={"/resturant/"+rest.info.id} key = {rest.info.id}><ResturantCard resList={rest}></ResturantCard></Link>)}
             </div>

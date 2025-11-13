@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import { createBrowserRouter,RouterProvider,Outlet} from "react-router-dom";
 import RestaurantMenu from "./components/ResturantMenu";
+
 // import Grocery from "./components/Grocery";
 // import Cart from "./components/Cart";
 
@@ -19,7 +20,7 @@ const AppLayout = () => {
         <div className="app">
             <Header/> 
             <Outlet/>
-        </div>
+        </div>  
     );
 };
 
