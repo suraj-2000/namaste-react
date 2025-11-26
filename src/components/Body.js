@@ -1,14 +1,15 @@
 import ResturantCard from "./ResturantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 const Body = () => {
     // useState() hooks
     const [searchBtnText, setSearchBtnText] = useState("");
     const [allRestaurants, setAllRestaurants] = useState([]);
     const [filteredRest, setFilteredRest] = useState([]);
+    const {loggedInUser,setUserName} = useContext(UserContext);
     const fetchData = async () => {
         const proxyURL = "https://api.allorigins.win/raw?url=";
         const targetURL = "https://namastedev.com/api/v1/listRestaurants";
@@ -62,6 +63,11 @@ const Body = () => {
                 <button className="mx-2 radius- bg-orange-600 rounded-xl px-4 py-1.5 hover:bg-orange-600 cursor-pointer" onClick={()=> {
                     applyFilters(searchBtnText, false);
                 }} >Search</button>
+                <label className="font-bold">User Name: </label>
+                <input className="border border-gray-400 rounded-md mt-4 px-3 py-1 text-gray-900" value={loggedInUser} onChange={(e)=>{
+                    setUserName(e.target.value);   
+                }}
+                />
             </div>
             <div className="filter-rest"> 
                 <button className="my-2 radius- bg-orange-600 rounded-xl px-4 py-1.5 hover:bg-orange-600 cursor-pointer" onClick={()=>{

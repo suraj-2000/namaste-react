@@ -32,11 +32,11 @@ class Contact extends React.Component {
             location="Gorakhpur"
             contact="surajsingh@gmail.com"
             />
-            <UserClass
+            {/* <UserClass
             name="Suraj Singh"
             location="Gorakhpur"
             contact="surajsingh@gmail.com"
-            />
+            /> */}
         </div>
         );
     };
